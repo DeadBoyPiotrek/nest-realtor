@@ -45,10 +45,7 @@ export class AuthService {
         phone,
       },
     });
-    const token = jwt.sign({ name, id: user.id }, process.env.JSON_TOKEN_KEY, {
-      expiresIn: '1d',
-    });
-    return { token, user };
+    return this.generateJWT(user.name, user.id);
   }
 
   async signIn({ email, password }: SignInParams) {
@@ -68,14 +65,12 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
 
-    const token = jwt.sign(
-      { name: user.name, id: user.id },
-      process.env.JSON_TOKEN_KEY,
-      {
-        expiresIn: '1d',
-      },
-    );
+    return this.generateJWT(user.name, user.id);
+  }
 
-    return { token, user };
+  private generateJWT(name: string, id: number): string {
+    return jwt.sign({ name, id }, process.env.JSON_TOKEN_KEY, {
+      expiresIn: '1d',
+    });
   }
 }
