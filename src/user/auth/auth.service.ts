@@ -7,6 +7,7 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
+import { UserType } from '@prisma/client';
 interface SignUpParams {
   email: string;
   password: string;
@@ -22,7 +23,10 @@ interface SignInParams {
 @Injectable()
 export class AuthService {
   constructor(private readonly prismaService: PrismaService) {}
-  async signUp({ email, password, name, phone }: SignUpParams) {
+  async signUp(
+    { email, password, name, phone }: SignUpParams,
+    userType: UserType,
+  ) {
     const userExists = await this.prismaService.user.findUnique({
       where: {
         email,
@@ -41,7 +45,7 @@ export class AuthService {
         email,
         password: hashedPassword,
         name,
-        user_type: 'BUYER',
+        user_type: userType,
         phone,
       },
     });
@@ -72,5 +76,10 @@ export class AuthService {
     return jwt.sign({ name, id }, process.env.JSON_TOKEN_KEY, {
       expiresIn: '1d',
     });
+  }
+
+  generateProductKey(email: string, userType: UserType): string {
+    const key = `${email}-${userType}-${process.env.PRODUCT_KEY_SECRET}`;
+    return bcrypt.hashSync(key, 10);
   }
 }
