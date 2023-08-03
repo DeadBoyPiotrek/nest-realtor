@@ -117,24 +117,6 @@ export class CreateHomeDto {
   images: Image[];
 }
 // create body in json so i can hit the create endpoint
-// {
-//   "address": "1234 Main St",
-//   "numberOfBedrooms": 3,
-//   "numberOfBathrooms": 2,
-//   "city": "San Diego",
-//   "price": 500000,
-//   "landSize": 2000,
-//   "propertyType": "HOUSE",
-//   "images": [
-//     {
-//       "url": "https://images.unsplash.com/photo-1611095789922-4b7b7b0b2b0f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-//     },
-//     {
-
-//       "url": "https://images.unsplash.com/photo-1611095789922-4b7b7b0b2b0f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-//     }
-//   ]
-// }
 
 export class UpdateHomeDto {
   @IsOptional()
