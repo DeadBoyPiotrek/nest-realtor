@@ -27,14 +27,20 @@ export class AuthService {
     { email, password, name, phone }: SignUpParams,
     userType: UserType,
   ) {
-    const userExists = await this.prismaService.user.findUnique({
+    const userExists = await this.prismaService.user.findMany({
       where: {
-        email,
+        OR: [
+          {
+            phone,
+          },
+          {
+            email,
+          },
+        ],
       },
     });
-    console.log(`🚀 ~ AuthService ~ signUp ~ userExists:`, userExists);
 
-    if (userExists) {
+    if (userExists.length > 0) {
       throw new ConflictException('User already exists');
     }
 

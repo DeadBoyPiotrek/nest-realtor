@@ -39,7 +39,7 @@ model Home {
   images                Image[]
   realtor_id            Int
   realtor               User @relation(fields: [realtor_id], references: [id])
-  messages              Message[]
+  messages              Message[] 
 }
 
 model Image {
@@ -48,7 +48,7 @@ model Image {
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
   home_id               Int
-  home                  Home @relation(fields: [home_id], references: [id])
+  home                  Home @relation(fields: [home_id], references: [id], onDelete: Cascade)
 }
 
 model Message {
