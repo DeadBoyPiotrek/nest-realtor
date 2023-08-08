@@ -51,8 +51,10 @@ export class AuthController {
   }
 
   @Get('/me')
-  me(@User() user: UserInfo) {
-    console.log(`🚀 ~ AuthController ~ me ~ user:`, user);
+  async me(@User() user: UserInfo) {
+    if (!user) {
+      throw new UnauthorizedException();
+    }
     return user;
   }
 }
