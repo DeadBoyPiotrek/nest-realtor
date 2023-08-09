@@ -4,10 +4,10 @@ import {
   HttpStatus,
   Injectable,
 } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UserType } from '@prisma/client';
+import { PrismaService } from '@/prisma/prisma.service';
 interface SignUpParams {
   email: string;
   password: string;

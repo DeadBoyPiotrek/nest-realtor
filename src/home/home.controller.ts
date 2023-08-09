@@ -13,8 +13,8 @@ import {
 import { HomeService } from './home.service';
 import { CreateHomeDto, HomeResponseDto, InquireDto } from './dtos/home.dto';
 import { PropertyType } from '@prisma/client';
-import { User, UserInfo } from 'src/user/decorators/user.decorator';
-import { Roles } from 'src/decorators/role.decorator';
+import { User, UserInfo } from '@/user/decorators/user.decorator';
+import { Roles } from '@/decorators/role.decorator';
 
 export interface HomeFilters {
   city?: string;
